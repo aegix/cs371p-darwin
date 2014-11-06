@@ -8,6 +8,7 @@
 // includes
 // --------
 
+#include <utility>
 #include <cassert>   // assert
 #include <cstdlib>   // rand, srand
 #include <iostream>  // cout, endl
@@ -30,6 +31,12 @@ int main () {
      1: go 0
     */
 
+    Species f("food");
+    pair <int,int> i(1,0);
+    f.addInstruction(i);
+    i = pair<int,int>(8,0);
+    f.addInstruction(i);
+
     // ------
     // hopper
     // ------
@@ -38,6 +45,12 @@ int main () {
      0: hop
      1: go 0
     */
+
+    Species h("hopper");
+    pair <int,int> j(0,0);
+    h.addInstruction(j);
+    j = pair<int,int>(8,0);
+    h.addInstruction(j);
 
     // -----
     // rover
@@ -57,6 +70,31 @@ int main () {
     10: go 0
     */
 
+    Species r("rover");
+    j = pair<int,int>(7,9);
+    r.addInstruction(j);
+    j = pair<int,int>(4,7);
+    r.addInstruction(j);
+    j = pair<int,int>(6,5);
+    r.addInstruction(j);
+    j = pair<int,int>(1,0);
+    r.addInstruction(j);
+    j = pair<int,int>(8,0);
+    r.addInstruction(j);
+    j = pair<int,int>(2,0);
+    r.addInstruction(j);
+    j = pair<int,int>(8,0);
+    r.addInstruction(j);
+    j = pair<int,int>(0,0);
+    r.addInstruction(j);
+    j = pair<int,int>(8,0);
+    r.addInstruction(j);
+    j = pair<int,int>(3,0);
+    r.addInstruction(j);
+    j = pair<int,int>(8,0);
+    r.addInstruction(j);
+
+
     // ----
     // trap
     // ----
@@ -69,19 +107,51 @@ int main () {
      4: go 0
     */
 
+     Species t("trap");
+     j = pair<int,int>(7,3);
+     t.addInstruction(j);
+     j = pair<int,int>(1,0);
+     t.addInstruction(j);
+     j = pair<int,int>(8,0);
+     t.addInstruction(j);
+     j = pair<int,int>(3,0);
+     t.addInstruction(j);
+     j = pair<int,int>(8,0);
+     t.addInstruction(j);
+
     // ----------
     // darwin 8x8
     // ----------
-
-    cout << "*** Darwin 8x8 ***" << endl;
-    Species sp("dog");
-    Creature c(sp, 0);
+    {
     Darwin x(8,8);
 
-    x.addCreature(c, 1,1);
+    cout << "*** Darwin 8x8 ***" << endl;
+
+    Creature f1(f);
+    Creature f2(f);
+    Creature h1(h);
+    Creature h2(h);
+    Creature h3(h);
+    Creature h4(h);
+
+    x.addCreature(f1, 0,0,EAST);
+    x.addCreature(f2, 7,7,WEST);
+    x.addCreature(h1, 3, 3, NORTH);
+    x.addCreature(h2, 4, 3, EAST);
+    x.addCreature(h3, 4, 4, SOUTH);
+    x.addCreature(h4, 3, 4, WEST);
     x.print();
     x.nextTurn();
     x.print();
+    x.nextTurn();
+    x.print();
+    x.nextTurn();
+    x.print();
+    x.nextTurn();
+    x.print();
+    x.nextTurn();
+    x.print();
+    }
     /*
     8x8 Darwin
     Food,   facing east,  at (0, 0)
@@ -97,9 +167,32 @@ int main () {
     // ----------
     // darwin 7x9
     // ----------
-
+    {
+    Darwin x(9,7);
     cout << "*** Darwin 7x9 ***" << endl;
     srand(0);
+
+    Creature t1(t);
+    Creature h1(h);
+    Creature r1(r);
+    Creature t2(t);
+
+    x.addCreature(t1, 0,0,SOUTH);
+    x.addCreature(h1, 2,3,EAST);
+    x.addCreature(r1, 4, 5, NORTH);
+    x.addCreature(t2, 8, 6, WEST);
+    x.print();
+    x.nextTurn();
+    x.print();
+    x.nextTurn();
+    x.print();
+    x.nextTurn();
+    x.print();
+    x.nextTurn();
+    x.print();
+    x.nextTurn();
+    x.print();
+    }
     /*
     7x9 Darwin
     Trap,   facing south, at (0, 0)
@@ -109,14 +202,18 @@ int main () {
     Simulate 5 moves.
     Print every grid.
     */
-
+    
     // ------------
     // darwin 72x72
     // without best
     // ------------
-
+    {
+    Darwin x(72,72);
     cout << "*** Darwin 72x72 without Best ***" << endl;
     srand(0);
+
+    
+
     /*
     Randomly place the following creatures facing randomly.
     Call rand(), mod it with 5184 (72x72), and use that for the position
@@ -137,7 +234,7 @@ int main () {
     // darwin 72x72
     // with best
     // ------------
-
+    }
     cout << "*** Darwin 72x72 with Best ***" << endl;
     srand(0);
     /*
