@@ -105,9 +105,9 @@ char Creature::getName() const{
 }
 
 bool Creature::is_enemy(Creature& c){
-  cout << getName() << " vs " << c.getName()<<endl;
+  //cout << getName() << " vs " << c.getName()<<endl;
   if(getName()!=c.getName()){
-    cout << "isenemy!" << endl;
+    //cout << "isenemy!" << endl;
     return true;
   }
   else 
