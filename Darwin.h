@@ -56,5 +56,7 @@ private:
   std::vector<std::vector<Creature*>> grid;
 public:
 	Darwin(int x, int y);
+	void nextTurn();
+	void print();
 	void addCreature(Creature &c, int x, int y, dir d);
 };
