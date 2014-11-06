@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 
-enum dir {NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3};
+enum dir {NORTH = 1, EAST = 2, SOUTH = 3, WEST = 0};
 
 class Species{
 private:
