@@ -16,6 +16,29 @@ public:
 	char getName() const;
 };
 
+class Creature{
+private:
+  bool set;
+  int _turn;
+  int _x;
+  int _y;
+  dir _d;   //direction
+  int _pc;
+  std::vector<std::pair<int,int>> instructions;
+  char name;
+  Creature();
+  void hop(std::vector<std::vector<Creature*>>&);
+  void left();
+  void right();
+
+public:
+  void  print();
+	Creature( Species sp);
+  void init(int, int, dir);
+	char getName() const;
+
+};
+
 class Darwin{
 private:
   Darwin();
