@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <cstdlib>
+#include <cassert>
 #include "Darwin.h"
 
 ////////////Species///////////////
@@ -32,7 +33,9 @@ Creature::Creature(Species sp) : _turn(0), _pc(0), instructions(sp.get_instructi
 }
 
 void Creature::init(int x, int y, dir d){
-
+  assert(x>=0);
+  assert(y>=0);
+  assert(d>=0&&d<=3);
   _x = x;
   _y = y;
   _d = d;
@@ -229,7 +232,7 @@ void Creature::infect(std::vector<std::vector<Creature*>> &grid){
 }
 
 bool Creature::if_empty(std::vector<std::vector<Creature*>> &grid, int n){
-
+  assert(n<instructions.size());
   switch (_d){
     case NORTH:
       if(_y!=0&&grid[_y-1][_x]==0){
@@ -260,6 +263,7 @@ bool Creature::if_empty(std::vector<std::vector<Creature*>> &grid, int n){
 }
 
 bool Creature::if_wall(std::vector<std::vector<Creature*>> &grid, int n){
+  assert(n<instructions.size());
 
   switch (_d){
     case NORTH:
@@ -292,6 +296,7 @@ bool Creature::if_wall(std::vector<std::vector<Creature*>> &grid, int n){
 }
 
 bool Creature::if_random(int n){
+  assert(n<instructions.size());
   int r = rand();
   if(r%2 != 0){
     _pc = n;
@@ -305,6 +310,7 @@ bool Creature::if_random(int n){
 }
 
 bool Creature::if_enemy(std::vector<std::vector<Creature*>> &grid, int n){
+  assert(n<instructions.size());
   switch (_d){
     case NORTH:
       //cout << "here2" << endl;
@@ -356,6 +362,8 @@ bool Creature::go(int n){
 ////////////Darwin///////////////
 
 Darwin::Darwin(int x, int y) : _turn(0), _x(x), _y(y){
+  assert(x>=0);
+  assert(y>=0);
   for(int i = 0; i<y; i++){
     std::vector<Creature*> temp(x,(Creature*)0);
     grid.push_back(temp);
