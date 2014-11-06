@@ -23,6 +23,21 @@ char Species::getName() const{
   return first;
 }
 
+////////////Darwin///////////////
 
+Darwin::Darwin(int x, int y) : _turn(0), _x(x), _y(y){
+  for(int i = 0; i<y; i++){
+    std::vector<Creature*> temp(x,(Creature*)0);
+    grid.push_back(temp);
+  }
+}
+
+void Darwin::addCreature(Creature &c, int x, int y, dir d){
+    c.init(x, y, d);
+    grid[y][x] = &c;
+    //cout << endl;
+    //c.print();
+    //cout << endl;
+}
 
 
