@@ -39,8 +39,60 @@ void Creature::init(int x, int y, dir d){
 
 }
 
+void Creature::action(std::vector<std::vector<Creature*>> &grid, int turn){
+  //cout << "action" << endl;
+  using namespace std;
+  //print();
+  //cout << turn << _turn << endl;
+  if(turn!=_turn)
+    return;
+  //std::pair<int,int> cur = instructions[_pc];
+  //cout << "pc "<<_pc<< endl;
+  //cout << cur.first <<" "<<cur.second<< endl;
+  bool repeat = true;
+
+  while(repeat){
+    std::pair<int,int> cur = instructions[_pc];
+    //cout << getName() << " " << cur.first << " " << cur.second << endl;
+    switch(cur.first){
+      case 0:
+        hop(grid);
+        repeat = false;
+        break;
+      case 1:
+        left();
+        repeat = false;
+        break;
+      case 2:
+        right();
+        repeat = false;
+        break;
+    }
+  }
+  ++_pc;
+  ++_turn;
+  
+}
+
+void Creature::print(){
+  for(int i = 0; i < instructions.size(); i ++){
+    cout << instructions[i].first << " "<< instructions[i].second<<endl;
+  }
+  cout << endl;
+}
+
 char Creature::getName() const{
   return name;
+}
+
+bool Creature::is_enemy(Creature& c){
+  //cout << getName() << " vs " << c.getName()<<endl;
+  if(getName()!=c.getName()){
+    //cout << "isenemy!" << endl;
+    return true;
+  }
+  else 
+    return false;
 }
 
 void Creature::hop(std::vector<std::vector<Creature*>> &grid){
@@ -110,7 +162,6 @@ void Creature::right(){
   }
 }
 
-
 ////////////Darwin///////////////
 
 Darwin::Darwin(int x, int y) : _turn(0), _x(x), _y(y){
@@ -118,6 +169,43 @@ Darwin::Darwin(int x, int y) : _turn(0), _x(x), _y(y){
     std::vector<Creature*> temp(x,(Creature*)0);
     grid.push_back(temp);
   }
+}
+
+void Darwin::nextTurn(){
+  for(int i = 0; i<_y; i++){
+    for(int j = 0; j <_x; j++){
+      //cout << i << " " << j << endl;
+      //cout << grid[i][j] << endl;
+      if(grid[i][j]!=0){
+        
+        grid[i][j]->action(grid, _turn);
+      }
+    }
+  }
+  ++_turn;
+}
+
+void Darwin::print(){
+  using namespace std;
+  cout << "Turn = " << _turn << '.' << endl;
+  cout << "  ";
+  for(int i = 0; i < _x; i++){
+    cout << i;
+  }
+  cout << endl;
+  for(int i = 0; i < _y; i++){
+    cout << i%10 << ' ';
+    for(int j = 0; j < _x; j++){
+      Creature* temp = grid[i][j];
+      if(temp==0)
+        cout << '.';
+      else{
+        cout << temp->getName();
+      }
+    }
+    cout << endl;
+  }
+  cout << endl;
 }
 
 void Darwin::addCreature(Creature &c, int x, int y, dir d){
