@@ -67,6 +67,25 @@ void Creature::action(std::vector<std::vector<Creature*>> &grid, int turn){
         right();
         repeat = false;
         break;
+      case 3:
+        infect(grid);
+        repeat = false;
+        break;
+      case 4:
+        repeat = if_empty(grid,cur.second);
+        break;
+      case 5:
+        repeat = if_wall(grid,cur.second);
+        break;
+      case 6:
+        repeat = if_random(cur.second);
+        break;
+      case 7:
+        repeat = if_enemy(grid, cur.second);
+        break;
+      case 8:
+        repeat = go(cur.second);
+        break;
     }
   }
   ++_pc;
@@ -161,6 +180,178 @@ void Creature::right(){
       break;
   }
 }
+
+void Creature::infect(std::vector<std::vector<Creature*>> &grid){
+    //cout << "infect" << endl;
+    switch (_d){
+    case NORTH:
+      if(_y!=0&&grid[_y-1][_x]!=0){
+        //cout << "here" << endl;
+        if(is_enemy(*grid[_y-1][_x])){
+          //cout << "successful infect" << endl;
+          grid[_y-1][_x]->instructions = instructions;
+          grid[_y-1][_x]->_pc = 0;
+          grid[_y-1][_x]->name = getName();
+        }
+      }
+      break;
+    case EAST:
+      if(_x!=grid[0].size()-1&&grid[_y][_x+1]!=0){
+        if(is_enemy(*grid[_y][_x+1])){
+          //cout << "successful infect" << endl;
+          grid[_y][_x+1]->instructions = instructions;
+          grid[_y][_x+1]->_pc = 0;
+          grid[_y][_x+1]->name = getName();
+        }
+      }
+      break;
+    case SOUTH:
+      if(_y!=grid.size()-1&&grid[_y+1][_x]!=0){
+        if(is_enemy(*grid[_y+1][_x])){
+          //cout << "successful infect" << endl;
+          grid[_y+1][_x]->instructions = instructions;
+          grid[_y+1][_x]->_pc = 0;
+          grid[_y+1][_x]->name = getName();
+        }
+      }
+      break;
+    case WEST:
+      if(_x!=0&&grid[_y][_x-1]!=0){
+        if(is_enemy(*grid[_y][_x-1])){
+          //cout << "successful infect" << endl;
+          grid[_y][_x-1]->instructions = instructions;
+          grid[_y][_x-1]->_pc = 0;
+          grid[_y][_x-1]->name = getName();
+        }
+      }
+      break;
+  }
+}
+
+bool Creature::if_empty(std::vector<std::vector<Creature*>> &grid, int n){
+
+  switch (_d){
+    case NORTH:
+      if(_y!=0&&grid[_y-1][_x]==0){
+        _pc = n;
+        return true;      }
+      break;
+    case EAST:
+      if(_x!=grid[0].size()-1&&grid[_y][_x+1]==0){
+        _pc = n;
+        return true;
+      }
+      break;
+    case SOUTH:
+      if(_y!=grid.size()-1&&grid[_y+1][_x]==0){
+        _pc = n;
+        return true;
+      }
+      break;
+    case WEST:
+      if(_x!=0&&grid[_y][_x-1]==0){
+        _pc = n;
+        return true;
+      }
+      break;
+  }
+  ++_pc;
+  return true;
+}
+
+bool Creature::if_wall(std::vector<std::vector<Creature*>> &grid, int n){
+
+  switch (_d){
+    case NORTH:
+      if(_y==0){
+        _pc = n;
+        return true;
+      }
+      break;
+    case EAST:
+      if(_x==grid[0].size()-1){
+        _pc = n;
+        return true;
+      }
+      break;
+    case SOUTH:
+      if(_y==grid.size()-1){
+        _pc = n;
+        return true;
+      }
+      break;
+    case WEST:
+      if(_x!=0){
+        _pc = n;
+        return true;
+      }
+      break;
+  }
+  ++_pc;
+  return true;
+}
+
+bool Creature::if_random(int n){
+  int r = rand();
+  if(r%2 != 0){
+    _pc = n;
+    return true;
+  }
+  else{
+    ++_pc;
+    return true;
+  }
+
+}
+
+bool Creature::if_enemy(std::vector<std::vector<Creature*>> &grid, int n){
+  switch (_d){
+    case NORTH:
+      //cout << "here2" << endl;
+      if(_y!=0&&grid[_y-1][_x]!=0){
+        if(is_enemy(*grid[_y-1][_x])){
+          _pc = n;
+          return true;
+        }
+      }
+      break;
+    case EAST:
+      if(_x!=grid[0].size()-1&&grid[_y][_x+1]!=0){
+        if(is_enemy(*grid[_y][_x+1])){
+          _pc = n;
+          return true;
+        }
+      }
+      break;
+    case SOUTH:
+      if(_y!=grid.size()-1&&grid[_y+1][_x]!=0){
+        if(is_enemy(*grid[_y+1][_x])){
+          _pc = n;
+          return true;
+        }
+      }
+      break;
+    case WEST:
+      if(_x!=0&&grid[_y][_x-1]!=0){
+        if(is_enemy(*grid[_y][_x-1])){
+          _pc = n;
+          return true;
+        }
+      }
+      break;
+  }
+    ++_pc;
+    return true;
+}
+
+bool Creature::go(int n){
+  using namespace std;
+  //cout << _pc << " ";
+  _pc = n;
+  return true;
+  //cout << _pc << endl;
+}
+
 
 ////////////Darwin///////////////
 

@@ -30,6 +30,13 @@ private:
   void hop(std::vector<std::vector<Creature*>>&);
   void left();
   void right();
+  void infect(std::vector<std::vector<Creature*>>&);
+  bool if_empty(std::vector<std::vector<Creature*>>&, int);
+  bool if_wall(std::vector<std::vector<Creature*>>&, int);
+  bool if_random(int);
+  bool if_enemy(std::vector<std::vector<Creature*>>&, int);
+  bool go(int);
+  bool is_enemy(Creature&);
 
 public:
   void  print();
