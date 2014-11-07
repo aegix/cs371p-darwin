@@ -12,13 +12,19 @@ Species::Species(std::string name){
   _name = name;
   first = name[0];
 }
+
+//return this species' instruction set
 std::vector<std::pair<int,int>>& Species::get_instructions() {
   return instructions;
 }
+
+//Adds instruction to set
 void Species::addInstruction(std::pair<int,int> in){
   using namespace std;
   instructions.push_back(in);
 }
+
+//return first letter of species name
 char Species::getName() const{
   return first;
 }
@@ -30,6 +36,7 @@ Creature::Creature(Species sp) : _turn(0), _pc(0), instructions(sp.get_instructi
   name = sp.getName();
 }
 
+//Initializes Creature with position and direction
 void Creature::init(int x, int y, dir d){
   assert(x>=0);
   assert(y>=0);
@@ -40,6 +47,7 @@ void Creature::init(int x, int y, dir d){
 
 }
 
+//Action Harness for each turn
 void Creature::action(std::vector<std::vector<Creature*>> &grid, int turn){
   using namespace std;
   if(turn!=_turn)
@@ -87,10 +95,12 @@ void Creature::action(std::vector<std::vector<Creature*>> &grid, int turn){
   
 }
 
+//Returns one letter name of Creature
 char Creature::getName() const{
   return name;
 }
 
+//Returns whether the creature is of a different species
 bool Creature::is_enemy(Creature& c){
   if(getName()!=c.getName()){
     return true;
@@ -99,6 +109,7 @@ bool Creature::is_enemy(Creature& c){
     return false;
 }
 
+//moves forward if possible
 void Creature::hop(std::vector<std::vector<Creature*>> &grid){
   switch (_d){
     case NORTH:
@@ -132,6 +143,7 @@ void Creature::hop(std::vector<std::vector<Creature*>> &grid){
   }
 }
 
+//Turns left
 void Creature::left(){
   switch(_d){
     case NORTH:
@@ -149,6 +161,7 @@ void Creature::left(){
   }
 }
 
+//turns right
 void Creature::right(){
   switch(_d){
     case NORTH:
@@ -166,6 +179,8 @@ void Creature::right(){
   }
 }
 
+//If there is a different species creature in front
+//it is changed to the caller's species and pc is reset
 void Creature::infect(std::vector<std::vector<Creature*>> &grid){
     switch (_d){
     case NORTH:
@@ -207,6 +222,7 @@ void Creature::infect(std::vector<std::vector<Creature*>> &grid){
   }
 }
 
+//checks if the space in front is empty and changes pc if true
 bool Creature::if_empty(std::vector<std::vector<Creature*>> &grid, int n){
   assert(n<instructions.size());
   switch (_d){
@@ -238,6 +254,7 @@ bool Creature::if_empty(std::vector<std::vector<Creature*>> &grid, int n){
   return true;
 }
 
+//checks if the space in front is a wall and changes pc if true
 bool Creature::if_wall(std::vector<std::vector<Creature*>> &grid, int n){
   assert(n<instructions.size());
 
@@ -271,6 +288,7 @@ bool Creature::if_wall(std::vector<std::vector<Creature*>> &grid, int n){
   return true;
 }
 
+//50/50 chance to change pc to n
 bool Creature::if_random(int n){
   assert(n<instructions.size());
   int r = rand();
@@ -285,6 +303,7 @@ bool Creature::if_random(int n){
 
 }
 
+//checks if space in front is occupied by an enemy and changes pc if true
 bool Creature::if_enemy(std::vector<std::vector<Creature*>> &grid, int n){
   assert(n<instructions.size());
   switch (_d){
@@ -343,6 +362,7 @@ Darwin::Darwin(int x, int y) : _turn(0), _x(x), _y(y){
   }
 }
 
+//Advances the world
 void Darwin::nextTurn(){
   for(int i = 0; i<_y; i++){
     for(int j = 0; j <_x; j++){
@@ -355,6 +375,7 @@ void Darwin::nextTurn(){
   ++_turn;
 }
 
+//Prints the status of the world
 void Darwin::print(){
   using namespace std;
   cout << "Turn = " << _turn << '.' << endl;
@@ -378,6 +399,7 @@ void Darwin::print(){
   cout << endl;
 }
 
+//Add Creature to the world
 void Darwin::addCreature(Creature &c, int x, int y, dir d){
     c.init(x, y, d);
     grid[y][x] = &c;
