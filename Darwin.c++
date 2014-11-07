@@ -8,6 +8,7 @@
 ////////////Species///////////////
 using namespace std;
 Species::Species(std::string name){
+  assert (name.size()>0);
   _name = name;
   first = name[0];
 }
@@ -94,13 +95,6 @@ void Creature::action(std::vector<std::vector<Creature*>> &grid, int turn){
   ++_pc;
   ++_turn;
   
-}
-
-void Creature::print(){
-  for(int i = 0; i < instructions.size(); i ++){
-    cout << instructions[i].first << " "<< instructions[i].second<<endl;
-  }
-  cout << endl;
 }
 
 char Creature::getName() const{
@@ -389,7 +383,7 @@ void Darwin::print(){
   cout << "Turn = " << _turn << '.' << endl;
   cout << "  ";
   for(int i = 0; i < _x; i++){
-    cout << i;
+    cout << i%10;
   }
   cout << endl;
   for(int i = 0; i < _y; i++){

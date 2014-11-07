@@ -39,7 +39,6 @@ private:
   bool is_enemy(Creature&);
 
 public:
-  void  print();
 	Creature( Species sp);
   void init(int, int, dir);
 	void action(std::vector<std::vector<Creature*>>&, int);
