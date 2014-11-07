@@ -18,7 +18,6 @@ public:
 
 class Creature{
 private:
-  bool set;
   int _turn;
   int _x;
   int _y;

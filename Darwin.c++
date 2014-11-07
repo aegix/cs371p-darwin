@@ -17,8 +17,6 @@ std::vector<std::pair<int,int>>& Species::get_instructions() {
 }
 void Species::addInstruction(std::pair<int,int> in){
   using namespace std;
-  //cout << first << endl;
-  //cout << in.first << " " << in.second << endl;
   instructions.push_back(in);
 }
 char Species::getName() const{
@@ -30,7 +28,6 @@ char Species::getName() const{
 Creature::Creature(Species sp) : _turn(0), _pc(0), instructions(sp.get_instructions()){
   using namespace std;
   name = sp.getName();
-  //print();
 }
 
 void Creature::init(int x, int y, dir d){
@@ -44,20 +41,13 @@ void Creature::init(int x, int y, dir d){
 }
 
 void Creature::action(std::vector<std::vector<Creature*>> &grid, int turn){
-  //cout << "action" << endl;
   using namespace std;
-  //print();
-  //cout << turn << _turn << endl;
   if(turn!=_turn)
     return;
-  //std::pair<int,int> cur = instructions[_pc];
-  //cout << "pc "<<_pc<< endl;
-  //cout << cur.first <<" "<<cur.second<< endl;
   bool repeat = true;
 
   while(repeat){
     std::pair<int,int> cur = instructions[_pc];
-    //cout << getName() << " " << cur.first << " " << cur.second << endl;
     switch(cur.first){
       case 0:
         hop(grid);
@@ -102,9 +92,7 @@ char Creature::getName() const{
 }
 
 bool Creature::is_enemy(Creature& c){
-  //cout << getName() << " vs " << c.getName()<<endl;
   if(getName()!=c.getName()){
-    //cout << "isenemy!" << endl;
     return true;
   }
   else 
@@ -179,13 +167,10 @@ void Creature::right(){
 }
 
 void Creature::infect(std::vector<std::vector<Creature*>> &grid){
-    //cout << "infect" << endl;
     switch (_d){
     case NORTH:
       if(_y!=0&&grid[_y-1][_x]!=0){
-        //cout << "here" << endl;
         if(is_enemy(*grid[_y-1][_x])){
-          //cout << "successful infect" << endl;
           grid[_y-1][_x]->instructions = instructions;
           grid[_y-1][_x]->_pc = 0;
           grid[_y-1][_x]->name = getName();
@@ -195,7 +180,6 @@ void Creature::infect(std::vector<std::vector<Creature*>> &grid){
     case EAST:
       if(_x!=grid[0].size()-1&&grid[_y][_x+1]!=0){
         if(is_enemy(*grid[_y][_x+1])){
-          //cout << "successful infect" << endl;
           grid[_y][_x+1]->instructions = instructions;
           grid[_y][_x+1]->_pc = 0;
           grid[_y][_x+1]->name = getName();
@@ -205,7 +189,6 @@ void Creature::infect(std::vector<std::vector<Creature*>> &grid){
     case SOUTH:
       if(_y!=grid.size()-1&&grid[_y+1][_x]!=0){
         if(is_enemy(*grid[_y+1][_x])){
-          //cout << "successful infect" << endl;
           grid[_y+1][_x]->instructions = instructions;
           grid[_y+1][_x]->_pc = 0;
           grid[_y+1][_x]->name = getName();
@@ -215,7 +198,6 @@ void Creature::infect(std::vector<std::vector<Creature*>> &grid){
     case WEST:
       if(_x!=0&&grid[_y][_x-1]!=0){
         if(is_enemy(*grid[_y][_x-1])){
-          //cout << "successful infect" << endl;
           grid[_y][_x-1]->instructions = instructions;
           grid[_y][_x-1]->_pc = 0;
           grid[_y][_x-1]->name = getName();
@@ -307,7 +289,6 @@ bool Creature::if_enemy(std::vector<std::vector<Creature*>> &grid, int n){
   assert(n<instructions.size());
   switch (_d){
     case NORTH:
-      //cout << "here2" << endl;
       if(_y!=0&&grid[_y-1][_x]!=0){
         if(is_enemy(*grid[_y-1][_x])){
           _pc = n;
@@ -346,10 +327,8 @@ bool Creature::if_enemy(std::vector<std::vector<Creature*>> &grid, int n){
 
 bool Creature::go(int n){
   using namespace std;
-  //cout << _pc << " ";
   _pc = n;
   return true;
-  //cout << _pc << endl;
 }
 
 
@@ -367,8 +346,6 @@ Darwin::Darwin(int x, int y) : _turn(0), _x(x), _y(y){
 void Darwin::nextTurn(){
   for(int i = 0; i<_y; i++){
     for(int j = 0; j <_x; j++){
-      //cout << i << " " << j << endl;
-      //cout << grid[i][j] << endl;
       if(grid[i][j]!=0){
         
         grid[i][j]->action(grid, _turn);
@@ -404,9 +381,6 @@ void Darwin::print(){
 void Darwin::addCreature(Creature &c, int x, int y, dir d){
     c.init(x, y, d);
     grid[y][x] = &c;
-    //cout << endl;
-    //c.print();
-    //cout << endl;
 }
 
 
