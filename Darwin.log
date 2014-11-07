@@ -1,0 +1,119 @@
+commit 0008f8b8b7375a4c450be1312a297f85c72c1ea2
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 20:31:05 2014 -0600
+
+    added TestDarwin.out:
+
+commit 530ddd57db3ff5d7406074b5c1521f8a83427150
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 20:30:29 2014 -0600
+
+    added RunDarwin.out
+
+commit 1b2cb4180515c58b52f2ec134af45e7ebd76d8bd
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 20:29:45 2014 -0600
+
+    added UML
+
+commit a548be00c6273c8fbe7600fe8c2695661c1d1782
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 20:29:31 2014 -0600
+
+    added doxygen
+
+commit ce517260cf8ce18237cc21a2c18d3d8d6215c3e7
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 20:19:00 2014 -0600
+
+    added comments
+
+commit 3c7b409fe2827cdb9825f078f9153e41f9c89e96
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 19:55:19 2014 -0600
+
+    cleaned up prints
+
+commit cd6f722bf867bf35893b95762ac802797d40a12d
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 19:54:58 2014 -0600
+
+    wrote tests
+
+commit edc77c69ee3c7dbd1b363bf61d5dae7b3e69041e
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 19:30:12 2014 -0600
+
+    removed creature print function
+
+commit 99fa76b1f1192918c002e48d9effe2fa4fe0c299
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 17:12:34 2014 -0600
+
+    added asserts
+
+commit d63c86064aac77aa5945e74ecc8d19ceda0625f5
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 17:10:47 2014 -0600
+
+    changed direction enum
+
+commit 5e959f00a6641d31cff35c55e50237c0e29e0295
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 16:55:07 2014 -0600
+
+    added runs for 8x8 and 7x9
+
+commit af1c3dbbeb83aedd3fefae7a82c66da41ddcce44
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 16:53:52 2014 -0600
+
+    finished Darwin implementation (i think)
+
+commit f75374cd82ad5275a6b8fdea77feb4c089c609c8
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 16:52:52 2014 -0600
+
+    added turn progression in Darwin
+
+commit 5eba95c29d1154e3486d778bb3954720dd6c806e
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 16:51:52 2014 -0600
+
+    implemented the rest of instructions
+
+commit afc95c59fd646e551dcb0661fea00215a24127c6
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 16:51:14 2014 -0600
+
+    added action harness
+
+commit 34487e0b2dfefd23d728cae9a742c2ae6a1e8bfe
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 16:50:05 2014 -0600
+
+    Started Creature, done hop, left, and right
+
+commit f1f23a49cbd9b9afae0e761c42bdf4780dc44d22
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 16:47:46 2014 -0600
+
+    Started Darwin implementation
+
+commit 4a6df48b3860678e40c6d72b4681e9fb7e12a347
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Thu Nov 6 16:46:21 2014 -0600
+
+    Added Species implementation
+
+commit 3e73f547be6b69cc53a34cd570dda00ca40a332f
+Author: Andrew Huang <andrewhuang@utexas.edu>
+Date:   Wed Nov 5 03:19:59 2014 -0600
+
+    add base files
+
+commit 6cdbad54bd861bb6e90b7057bb3be2cc7bc8828f
+Author: aegix <andrewhuang@utexas.edu>
+Date:   Wed Nov 5 00:59:54 2014 -0600
+
+    Initial commit
